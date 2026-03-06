@@ -13,9 +13,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
+      appBar: AppBar(title: const Text('Settings')),
       body: Consumer<AuthProvider>(
         builder: (context, authProvider, _) {
           final userProfile = authProvider.userProfile;
@@ -40,17 +38,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   decoration: BoxDecoration(
                     color: const Color(0xFF1A1F3A),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF334155), width: 1),
+                    border: Border.all(
+                      color: const Color(0xFF334155),
+                      width: 1,
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Profile Information',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(fontWeight: FontWeight.bold, color: Colors.white),
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                       const SizedBox(height: 16),
                       _ProfileInfoTile(
@@ -65,8 +66,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       const SizedBox(height: 12),
                       _ProfileInfoTile(
                         label: 'Email Verified',
-                        value:
-                            authProvider.isEmailVerified ? 'Yes' : 'No',
+                        value: authProvider.isEmailVerified ? 'Yes' : 'No',
                       ),
                     ],
                   ),
@@ -76,10 +76,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // Preferences Section
                 Text(
                   'Preferences',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge, color: Colors.white
-                      ?.copyWith(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 16),
 
@@ -88,7 +88,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: const Color(0xFF1A1F3A),
-                    border: Border.all(color: const Color(0xFF334155), width: 1),
+                    border: Border.all(
+                      color: const Color(0xFF334155),
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
@@ -99,15 +102,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         children: [
                           Text(
                             'Location-based Notifications',
-                            style:
-                                Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.white),
+                            style: Theme.of(context).textTheme.bodyLarge
+                                ?.copyWith(color: Colors.white),
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Receive notifications about nearby services',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
+                            style: Theme.of(context).textTheme.bodySmall
                                 ?.copyWith(color: const Color(0xFF94A3B8)),
                           ),
                         ],
@@ -115,8 +116,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       Switch(
                         value: userProfile?.notificationsEnabled ?? true,
                         onChanged: (value) async {
-                          await authProvider
-                              .updateNotificationPreference(value);
+                          await authProvider.updateNotificationPreference(
+                            value,
+                          );
                           if (mounted) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
@@ -139,30 +141,31 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 // App Info Section
                 Text(
                   'About',
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge, color: Colors.white),
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     color: const Color(0xFF1A1F3A),
-                    border: Border.all(color: const Color(0xFF334155), width: 1),
+                    border: Border.all(
+                      color: const Color(0xFF334155),
+                      width: 1,
+                    ),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _InfoTile(
+                      const _InfoTile(
                         label: 'App Name',
                         value: 'Kigali City Services',
                       ),
-                      Divider(color: const Color(0xFF334155)),
-                      _InfoTile(
-                        label: 'Version',
-                        value: '1.0.0',
-                      ),
+                      const Divider(color: Color(0xFF334155)),
+                      const _InfoTile(label: 'Version', value: '1.0.0'),
                     ],
                   ),
                 ),
@@ -207,7 +210,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel', style: TextStyle(color: Color(0xFF0F766E))),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Color(0xFF0F766E)),
+            ),
           ),
           TextButton(
             onPressed: () async {
@@ -216,7 +222,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Navigator.pop(context);
               }
             },
-            child: const Text('Sign Out', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600)),
+            child: const Text(
+              'Sign Out',
+              style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),
@@ -228,10 +237,7 @@ class _ProfileInfoTile extends StatelessWidget {
   final String label;
   final String value;
 
-  const _ProfileInfoTile({
-    required this.label,
-    required this.value,
-  });
+  const _ProfileInfoTile({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -239,17 +245,17 @@ class _ProfileInfoTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          label,const Color(0xFF94A3B8),
-              ),
+          label,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: const Color(0xFF94A3B8)),
         ),
         Text(
           value,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-                color: Colors.white
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
         ),
       ],
     );
@@ -260,10 +266,7 @@ class _InfoTile extends StatelessWidget {
   final String label;
   final String value;
 
-  const _InfoTile({
-    required this.label,
-    required this.value,
-  });
+  const _InfoTile({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -272,18 +275,18 @@ class _InfoTile extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(const Color(0xFF94A3B8),
-                ),
+          Text(
+            label,
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: const Color(0xFF94A3B8)),
           ),
           Text(
             value,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white
-            value,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                ),
+              fontWeight: FontWeight.w500,
+              color: Colors.white,
+            ),
           ),
         ],
       ),
