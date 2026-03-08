@@ -42,10 +42,22 @@ class _ListingDetailScreenState extends State<ListingDetailScreen> {
   }
 
   Future<void> _launchDirections() async {
-    final url =
-        'https://www.google.com/maps/search/${widget.listing.latitude},${widget.listing.longitude}';
-    if (await canLaunchUrl(Uri.parse(url))) {
-      await launchUrl(Uri.parse(url));
+    final uri = Uri.parse(
+      'https://www.google.com/maps/search/?api=1&query=${widget.listing.latitude},${widget.listing.longitude}',
+    );
+
+    if (!await canLaunchUrl(uri)) {
+      debugPrint('Could not launch directions URL: $uri');
+      return;
+    }
+
+    final launched = await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    );
+
+    if (!launched) {
+      debugPrint('Failed to launch directions URL: $uri');
     }
   }
 

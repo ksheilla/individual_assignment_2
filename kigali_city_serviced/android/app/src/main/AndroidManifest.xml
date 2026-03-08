@@ -3,6 +3,11 @@
         android:label="kigali_city_serviced"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+    android:name="com.google.android.geo.API_KEY"
+    android:value="AIzaSyAKlIwA3NHVQ9q41JYdOFSuQS0osXG-SJ8"/>
+    
         <activity
             android:name=".MainActivity"
             android:exported="true"
